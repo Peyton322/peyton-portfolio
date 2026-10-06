@@ -141,7 +141,7 @@ body{background:var(--paper)}
     const total = document.documentElement.scrollHeight - innerHeight;
     progress.style.transform = 'scaleX(' + (total > 0 ? Math.min(1, Math.max(0, scrollY / total)) : 0) + ')';
     let active = -1;
-    sections.forEach((section, index) => {if (section && section.getBoundingClientRect().top <= 150) active = index;});
+    sections.forEach((section, index) => {const title = section && (section.querySelector('.section-title') || section); if (title && title.getBoundingClientRect().top <= document.querySelector('header').getBoundingClientRect().height + 48) active = index;});
     if (total > 0 && scrollY >= total - 10) active = links.length - 1;
     links.forEach((link, index) => {if (index === active) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current');});
     scheduled = false;
@@ -149,6 +149,30 @@ body{background:var(--paper)}
   addEventListener('scroll', () => {if (!scheduled) {scheduled = true;requestAnimationFrame(updateScroll);}}, {passive:true});
   addEventListener('resize', updateScroll);
   addEventListener('load', updateScroll);
+
+  // Align anchor headings beneath the responsive sticky navigation.
+  function navigateToSection(hash, behavior) {
+    const section = document.getElementById(hash.slice(1));
+    if (!section) return;
+    const target = section.querySelector('.section-title') || section;
+    const headerHeight = document.querySelector('header').getBoundingClientRect().height;
+    const sectionTop = section.getBoundingClientRect().top + (target !== section ? parseFloat(getComputedStyle(section).paddingTop) : 0);
+    const top = hash === '#main' ? 0 : scrollY + sectionTop - headerHeight - 32;
+    window.scrollTo({top: Math.max(0, top), behavior: reduced.matches ? 'instant' : behavior});
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', event => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      const hash = link.getAttribute('href');
+      if (!document.getElementById(hash.slice(1))) return;
+      event.preventDefault();
+      if (location.hash !== hash) history.pushState(null, '', hash);
+      navigateToSection(hash, 'smooth');
+    });
+  });
+  addEventListener('popstate', () => navigateToSection(location.hash || '#main', 'instant'));
+  addEventListener('load', () => {if (location.hash) navigateToSection(location.hash, 'instant');});
+
   updateScroll();
 })();
 </script>
