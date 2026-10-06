@@ -87,13 +87,28 @@ body{background:var(--paper)}
 }
 .motion-ready .reveal{transition:opacity .7s ease,transform .7s cubic-bezier(.2,.65,.3,1),translate .32s cubic-bezier(.2,.65,.3,1),box-shadow .32s ease,border-color .32s ease}
 .projects{align-items:start}.project{align-self:start}
+
+/* One-time typewriter introduction; layout stays stable. */
+.typing-line,.typing-name{position:relative}
+.typing-preparing .typing-line,.typing-preparing .typing-name{visibility:hidden}
+.typing-cell{opacity:1}
+.typing-running .typing-cell{opacity:0}
+.typing-running .typing-cell.typed{opacity:1}
+.typing-cell.cursor-here:after{content:'';position:absolute;right:-.055em;top:.17em;height:.77em;width:2px;background:currentColor;animation:typing-caret .7s step-end infinite}
+.typing-cell{position:relative}
+@keyframes typing-caret{50%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.typing-preparing .typing-line,.typing-preparing .typing-name{visibility:visible}.typing-running .typing-cell{opacity:1}.typing-cell.cursor-here:after{display:none}}
+@media print{.typing-preparing .typing-line,.typing-preparing .typing-name{visibility:visible}.typing-running .typing-cell{opacity:1}.typing-cell.cursor-here:after{display:none}}
+
+.typing-cell.cursor-here:after{display:none}
 </style>
+<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('typing-preparing');</script>
 </head>
 <body>
 <a class="skip" href="#main">跳至主要內容</a>
 <header><div class="reading-progress" aria-hidden="true"></div><div class="wrap nav"><a class="brand" href="#main" aria-label="Peyton 首頁">Peyton<span>.</span></a><nav aria-label="主要導覽"><a href="#about">關於我</a><a href="#work">作品與研究</a><a href="#experience">經歷</a><a href="#contact">聯絡</a></nav></div></header>
 <main id="main" class="wrap">
-<section class="hero" aria-labelledby="hero-title"><div><div class="eyebrow">Portfolio & Research</div><h1 id="hero-title">Hello, I'm<br><em>Peyton.</em></h1><p class="cn">陳家敏</p><p class="intro">從研究到實作，讓技術回應真實需求。<br>探索人工智慧、網頁開發與資訊系統整合。</p><div class="actions"><a class="button primary" href="#work">探索我的作品</a><a class="button" href="mailto:nina93322@gmail.com">與我聯絡</a></div></div><aside class="profile" aria-label="個人照片與目前學歷"><div class="portrait-panel" aria-hidden="true"><span>PEYTON<br>CHEN</span></div><figure class="portrait-frame"><img src="peyton-graduation.jpg" alt="Peyton 穿著畢業袍坐在草地上，舉起學士帽" width="1108" height="1477" fetchpriority="high"></figure><div class="profile-caption"><div><h2>國立臺灣科技大學</h2><p class="sub">資訊管理系 · 碩士班一年級</p></div></div><div class="areas"><span class="tag">AI Research</span><span class="tag">Web Development</span><span class="tag">System Integration</span></div></aside></section>
+<section class="hero" aria-labelledby="hero-title"><div><div class="eyebrow">Portfolio & Research</div><h1 id="hero-title" aria-label="Hello, I'm Peyton."><span class="typing-line" aria-hidden="true">Hello, I'm</span><br><em class="typing-name" aria-hidden="true">Peyton.</em></h1><p class="cn">陳家敏</p><p class="intro">從研究到實作，讓技術回應真實需求。<br>探索人工智慧、網頁開發與資訊系統整合。</p><div class="actions"><a class="button primary" href="#work">探索我的作品</a><a class="button" href="mailto:nina93322@gmail.com">與我聯絡</a></div></div><aside class="profile" aria-label="個人照片與目前學歷"><div class="portrait-panel" aria-hidden="true"><span>PEYTON<br>CHEN</span></div><figure class="portrait-frame"><img src="peyton-graduation.jpg" alt="Peyton 穿著畢業袍坐在草地上，舉起學士帽" width="1108" height="1477" fetchpriority="high"></figure><div class="profile-caption"><div><h2>國立臺灣科技大學</h2><p class="sub">資訊管理系 · 碩士班一年級</p></div></div><div class="areas"><span class="tag">AI Research</span><span class="tag">Web Development</span><span class="tag">System Integration</span></div></aside></section>
 <div class="highlights" aria-label="作品與經歷摘要"><div class="highlight"><strong>06</strong><span>精選實作作品<small>SELECTED PROJECTS</small></span></div><div class="highlight"><strong>03</strong><span>競賽獲獎成果<small>COMPETITION AWARDS</small></span></div><div class="highlight"><strong>03</strong><span>課程助教經驗<small>TEACHING EXPERIENCES</small></span></div></div><section id="about"><div class="section-title reveal"><span class="num">01</span><h2>關於我</h2><span class="en">A little about me</span></div><div class="about-grid"><div><p>我是陳家敏，也可以叫我 Peyton。目前就讀台科大資訊管理系碩士班，大學畢業於國立高雄科技大學智慧商務系。</p><p>我的經驗橫跨 <strong>AI 研究、網站與行動應用開發，以及即時資料整合</strong>。從汽車預測性維護研究、企業官網製作，到海洋載具監測系統，我關注如何把需求轉化成可使用的系統。</p><p>我喜歡結合理論與實務，也曾擔任網頁設計與人工智慧相關課程助教，在協助同學學習的過程中持續累積技術與溝通能力。</p></div><div class="skills"><div class="skill reveal"><h3><span class="skill-code" aria-hidden="true">01</span>網頁與行動應用</h3><p>React · React Native · Flutter<br>HTML / CSS · Node.js · PHP · MySQL</p></div><div class="skill reveal"><h3><span class="skill-code" aria-hidden="true">02</span>人工智慧與資料</h3><p>機器學習 · 深度學習<br>Multi-Head Attention · Mamba</p></div><div class="skill reveal"><h3><span class="skill-code" aria-hidden="true">03</span>系統整合</h3><p>Google Maps API · MQTT · UDP<br>地理資訊應用 · 即時資料視覺化</p></div></div></div></section>
 <section id="work"><div class="section-title reveal"><span class="num">02</span><h2>作品與研究</h2><span class="en">Selected work</span></div><article class="research reveal"><div><div class="eyebrow">Featured Research · 畢業專題</div><h3>以 AI 預測汽車維護需求</h3><p>基於多頭注意力機制之 Mamba 架構於服務導向之汽車預測性維護系統研究</p><p>與汽車 ERP 軟體廠商討論產業需求，結合歷史維修資料、多頭注意力機制與 Mamba，探索更合適的維修時機與零件需求預測。</p><div class="areas"><span class="tag">Mamba</span><span class="tag">Multi-Head Attention</span><span class="tag">ERP</span><span class="tag">Predictive Maintenance</span></div><ol class="research-flow" aria-label="研究應用流程"><li><small>01 / DATA</small>歷史維修資料</li><li><small>02 / MODEL</small>注意力與 Mamba</li><li><small>03 / APPLY</small>維護決策支援</li></ol></div><div class="research-detail"><h4>研究與應用</h4><p>將模型研究與企業系統需求連結，以資料分析支援維護決策、資源配置及營運效率。</p><h4>競賽成果</h4><ul class="awards"><li>2026 E 化系統創意應用競賽 · 優勝<small>中華企業資源規劃學會</small></li><li>2025 E 化系統創意應用競賽 · 佳作<small>中華企業資源規劃學會</small></li><li>第六屆創出名堂企劃實作競賽 · 佳作<small>2025 年 · 資訊組</small></li></ul></div></article>
 <div class="work-toolbar"><div class="filters" aria-label="作品分類" hidden><button class="filter" type="button" aria-pressed="true" data-filter="all">全部作品</button><button class="filter" type="button" aria-pressed="false" data-filter="web">網站開發</button><button class="filter" type="button" aria-pressed="false" data-filter="system">系統與物聯網</button><button class="filter" type="button" aria-pressed="false" data-filter="app">行動應用</button></div><span class="result-count" role="status" aria-live="polite">6 件精選作品</span></div><div class="projects"><article class="project reveal" data-category="web"><div class="meta"><span>企業網站 · 接案專案</span><span>01</span></div><h3>創客兔科技官方網站</h3><p>負責官網的設計、開發與維護，以 React 建立響應式網站，呈現企業服務、解決方案與品牌理念。涵蓋整體 UI/UX、頁面架構與前端製作。</p><div class="project-tags"><span class="tag">React</span> <span class="tag">UI/UX</span> <span class="tag">Responsive Design</span></div><div class="links"><a class="text-link" href="https://makerrabbittech.github.io/makerrabbittech/" target="_blank" rel="noopener noreferrer">查看網站</a></div><details><summary>我的貢獻</summary><p>從資訊架構、UI/UX 設計到 React 響應式前端，完成首頁、關於我們、服務項目、解決方案與聯絡頁面。</p></details></article>
@@ -110,6 +125,44 @@ body{background:var(--paper)}
 <script>
 (() => {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const typingHeading = document.getElementById('hero-title');
+  const typingCells = [];
+  let typingTimer;
+  function finishTyping() {
+    clearTimeout(typingTimer);
+    typingCells.forEach(cell => {cell.classList.add('typed');cell.classList.remove('cursor-here');});
+    typingHeading.classList.remove('typing-running');
+    document.documentElement.classList.remove('typing-preparing');
+  }
+  if (!reduced.matches) {
+    typingHeading.querySelectorAll('.typing-line,.typing-name').forEach(line => {
+      const text = line.textContent;
+      line.textContent = '';
+      Array.from(text).forEach(character => {
+        const cell = document.createElement('span');
+        cell.className = 'typing-cell';
+        cell.textContent = character;
+        line.appendChild(cell);
+        typingCells.push(cell);
+      });
+    });
+    typingHeading.classList.add('typing-running');
+    document.documentElement.classList.remove('typing-preparing');
+    let typingIndex = 0;
+    function typeNextCharacter() {
+      typingCells.forEach(cell => cell.classList.remove('cursor-here'));
+      const cell = typingCells[typingIndex++];
+      cell.classList.add('typed','cursor-here');
+      if (typingIndex < typingCells.length) {
+        typingTimer = setTimeout(typeNextCharacter, typingIndex === 10 ? 260 : 85);
+      } else typingTimer = setTimeout(finishTyping, 650);
+    }
+    typingTimer = setTimeout(typeNextCharacter, 350);
+    reduced.addEventListener('change', event => {if(event.matches)finishTyping();});
+    addEventListener('beforeprint', finishTyping);
+  } else finishTyping();
+
   const revealItems = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window && !reduced.matches) {
     document.documentElement.classList.add('motion-ready');
